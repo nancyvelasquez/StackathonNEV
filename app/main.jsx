@@ -11,6 +11,12 @@ import React from 'react'
 import {render} from 'react-dom'
 import {Provider, connect} from 'react-redux'
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
+import Perf from 'react-addons-perf';
+
+import Home from './components/Home'
+import Browser from './components/Browser'
+import NavbarSection from './components/Navbar'
+import FooterSection from './components/Footer'
 
 import store from './store'
 import Jokes from './components/Jokes'
@@ -18,20 +24,24 @@ import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
 
-const ExampleApp = connect(
+window.Perf = Perf;
+
+const Planets = connect(
   ({ auth }) => ({ user: auth })
 )(
   ({ user, children }) =>
     <div>
-      <nav>
+      {/* <nav>
         {user ? <WhoAmI/> : <Login/>}
-      </nav>
+      </nav> */}
       <main>
+        <NavbarSection />
         <Switch>
-          <Route path="/jokes" component={Jokes} />
-          <Redirect exact from="/" to="/jokes" />
+          <Route exact path="/" component={Home} />
+           <Route exact path="/:slug?" component={Browser} /> 
           <Route component={NotFound} />
         </Switch>
+        <FooterSection />
       </main>
     </div>
 )
@@ -39,8 +49,29 @@ const ExampleApp = connect(
 render(
   <Provider store={store}>
     <Router>
-      <ExampleApp />
+      <Planets />
     </Router>
   </Provider>,
-  document.getElementById('main')
+  document.getElementById('content')
 )
+
+
+
+// const LVR = ({ user, children }) => (
+//   <div>
+//     <Navbar />
+
+//     <Routes />
+
+//     <Footer />
+//   </div>
+// )
+
+// render(
+//   <Provider store={store}>
+//     <Router>
+//       <LVR />
+//     </Router>
+//   </Provider>,
+//   document.getElementById('main')
+// )
