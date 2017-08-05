@@ -19,4 +19,4 @@ const store = createStore(
 export default store
 
 // Set the auth info at start
-store.dispatch(whoami())
+// store.dispatch(whoami())
