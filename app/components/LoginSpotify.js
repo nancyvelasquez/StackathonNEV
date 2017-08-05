@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 
-const spotifyClientId = process.env.SPOTIFY_CLIENT_ID.replace(/"/g, '') 
-//|| require('../../secrets.js').spotifyClientId
-const spotifyRedirectURI = process.env.SPOTIFY_REDIRECT_URI.replace(/"/g, '') 
-//|| require('../../secrets.js').spotifyRedirectURI
+const spotifyClientId = process.env.SPOTIFY_CLIENT_ID.replace(/"/g, '') || require('../../secrets.js').spotifyClientId
+const spotifyRedirectURI = process.env.SPOTIFY_REDIRECT_URI.replace(/"/g, '') || require('../../secrets.js').spotifyRedirectURI
 
 export default class LoginSpotify extends Component {
   constructor() {
