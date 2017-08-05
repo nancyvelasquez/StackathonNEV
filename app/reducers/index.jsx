@@ -8,7 +8,7 @@
 
 import axios from 'axios'
 
-const googleKey = process.env.GOOGLE_KEY.replace(/"/g, '') || require('../../secrets.js').googleKey
+const googleKey = process.env.GOOGLE_KEY.replace(/"/g, '') || require('../../secret.js').googleKey
 
 /* -----------------    ACTIONS     ------------------ */
 

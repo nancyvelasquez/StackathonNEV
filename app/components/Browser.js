@@ -35,12 +35,12 @@ class Browser extends Component {
                   <div>
                   { this.props.isLoggedIntoSpotify ? (
                     <div id="appBlock" className="flexcontainer-horizontal">
-                      <div className="col-md-4">
+                      {/* <div className="col-md-4">
                         <Corpus access={this.props.access_token} />
                       </div>
                       <div className="col-md-8">
                         <Visualizer />
-                      </div>
+                      </div> */}
                     </div>
                   ) : (
                       <LoginSpotify />
@@ -69,7 +69,7 @@ class Browser extends Component {
               </div>
             </div>
           </div>
-          <Viewer example={activeExample} />
+          <Viewer example={examples[0]} />
         </div>
       );
     };
