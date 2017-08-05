@@ -8,7 +8,8 @@
 
 import axios from 'axios'
 
-const googleKey = process.env.GOOGLE_KEY.replace(/"/g, '') || require('../../secret.js').googleKey
+// const googleKey = process.env.GOOGLE_KEY.replace(/"/g, '')
+// // || require('../../secret.js').googleKey
 
 /* -----------------    ACTIONS     ------------------ */
 
@@ -33,14 +34,14 @@ const setCurr = (artist, song) => {
 
 const setToken = token => ({ type: SET_TOKEN, token })
 
-const setCorpus = corpus => {
-  corpus = corpus.replace(/\n\n/g, '\n')
-    .replace(/\n/g, '.\n')
-  return {
-    type: SET_CORPUS,
-    corpus
-  }
-}
+// const setCorpus = corpus => {
+//   corpus = corpus.replace(/\n\n/g, '\n')
+//     .replace(/\n/g, '.\n')
+//   return {
+//     type: SET_CORPUS,
+//     corpus
+//   }
+// }
 
 // const parseSentences = arr => {
 //   return arr.map(obj => {

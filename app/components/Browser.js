@@ -4,6 +4,7 @@ import { NavLink, Router, Route, IndexRedirect, browserHistory } from 'react-rou
 import Viewer from './Viewer';
 
 import Planets from './Planets/index';
+import LoginSpotify from './LoginSpotify'
 
 const examples = [
   { 
@@ -35,37 +36,11 @@ class Browser extends Component {
                   <div>
                   { this.props.isLoggedIntoSpotify ? (
                     <div id="appBlock" className="flexcontainer-horizontal">
-                      {/* <div className="col-md-4">
-                        <Corpus access={this.props.access_token} />
-                      </div>
-                      <div className="col-md-8">
-                        <Visualizer />
-                      </div> */}
                     </div>
                   ) : (
                       <LoginSpotify />
                   ) }
                   </div>
-                {/* {examples.map((example, index) => {
-                  if (example.separator) {
-                    return (<h2 key={index}>{example.name}</h2>);
-                  }
-
-                  if (example.advanced) {
-                    return (<div key={index}>
-                      <a href={example.page} target="blank">{example.name}</a> (new tab)
-                    </div>);
-                  }
-
-                  return (<NavLink
-                    to={`/${example.slug}`}
-                    key={index}
-                    className="link"
-                    activeClassName="selected"
-                  >
-                    {example.name}
-                  </NavLink>);
-                })} */}
               </div>
             </div>
           </div>
@@ -123,4 +98,4 @@ const mapDispatchToProps = (dispatch, getState) => ({
   }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(Browser)

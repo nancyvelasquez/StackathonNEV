@@ -1,14 +1,6 @@
 module.exports = {
-  Google: {
-    id: '',
-    secret: ''
-  },
-  Facebook: {
-    id: '',
-    secret: ''
-  },
-  Github: {
-    id: '',
-    secret: ''
-  }
+  spotifyClientId: 'YOUR CLIENT ID GOES HERE',
+  spotifyClientSecret: 'YOUR CLIENT SECRET GOES HERE',
+  spotifyRedirectURI: 'YOUR REDIRECT URI GOES HERE',
+  googleKey: 'YOUR GOOGLE KEY GOES HERE'
 }
