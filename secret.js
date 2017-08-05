@@ -1,1 +1,14 @@
-// this is not here
+module.exports = {
+  Google: {
+    id: '',
+    secret: ''
+  },
+  Facebook: {
+    id: '',
+    secret: ''
+  },
+  Github: {
+    id: '',
+    secret: ''
+  }
+}
