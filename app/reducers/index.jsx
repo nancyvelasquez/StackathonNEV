@@ -8,7 +8,7 @@
 
 import axios from 'axios'
 
-const googleKey = process.env.GOOGLE_KEY.replace(/"/g, '') || require('../../secret.js').googleKey
+// const googleKey = process.env.GOOGLE_KEY.replace(/"/g, '') || require('../../secret.js').googleKey
 
 /* -----------------    ACTIONS     ------------------ */
 
@@ -33,14 +33,14 @@ const setCurr = (artist, song) => {
 
 const setToken = token => ({ type: SET_TOKEN, token })
 
-const setCorpus = corpus => {
-  corpus = corpus.replace(/\n\n/g, '\n')
-    .replace(/\n/g, '.\n')
-  return {
-    type: SET_CORPUS,
-    corpus
-  }
-}
+// const setCorpus = corpus => {
+//   corpus = corpus.replace(/\n\n/g, '\n')
+//     .replace(/\n/g, '.\n')
+//   return {
+//     type: SET_CORPUS,
+//     corpus
+//   }
+// }
 
 // const parseSentences = arr => {
 //   return arr.map(obj => {
@@ -85,13 +85,10 @@ export default (state = {
       newState.access_token = action.token
       break
 
-    // case SET_CORPUS:
-    //   newState.corpus = action.corpus
-    //   break
-
-    // case SET_CHART_DATA:
-    //   newState.data = action.data
-    //   break
+    case SET_NEXT: 
+      newState.currSong = action.song
+      newState.currArtist = action.artist
+      break
 
     default:
       return state
@@ -104,3 +101,27 @@ export default (state = {
 export const storeToken = token => (dispatch) => {
   return dispatch(setToken(token))
 }
+
+export const grabCurrSong = token => (dispatch, getState) => {
+  return axios.get('https://api.spotify.com/v1/me/player/currently-playing', { headers: { 'Authorization': `Bearer ${token}` } })
+    .then(res => {
+      const apiArtist = res.data.item.artists[0].name,
+        apiSong = res.data.item.name
+      if (apiArtist !== getState().currArtist || apiSong !== getState().currSong) {
+        dispatch(setCurr(apiArtist, apiSong))
+      } //TODO: handle else
+    })
+}
+
+export const grabNextSong = token => (dispatch, getState) => {
+  return axios.post('https://api.spotify.com/v1/me/player/next', { headers: { 'Authorization': `Bearer ${token}` } })
+    .then(res => {
+      console.log('Hey this is the res in post', res)
+      const apiArtist = res.data.item.artists[0].name,
+        apiSong = res.data.item.name
+      if (apiArtist !== getState().currArtist || apiSong !== getState().currSong) {
+        dispatch(setCurr(apiArtist, apiSong))
+      } //TODO: handle else
+    })
+}
+  

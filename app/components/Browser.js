@@ -3,6 +3,8 @@ import ReactDOM, { render } from 'react-dom';
 import { NavLink, Router, Route, IndexRedirect, browserHistory } from 'react-router-dom';
 import Viewer from './Viewer';
 
+import LoginSpotify from './LoginSpotify'
+import Corpus from './Corpus'
 import Planets from './Planets/index';
 
 const examples = [
@@ -29,44 +31,16 @@ class Browser extends Component {
         <div>
           <div id="panel" className="collapsed">
             <h1><a href="https://github.com/toxicFork/react-three-renderer/">react-three-renderer</a> / examples</h1>
-            <div id="content">
-              <div>
-                <h2>webgl</h2>
-                  <div>
+            <div>
                   { this.props.isLoggedIntoSpotify ? (
                     <div id="appBlock" className="flexcontainer-horizontal">
-                      {/* <div className="col-md-4">
+                      <div className="col-md-4">
                         <Corpus access={this.props.access_token} />
                       </div>
-                      <div className="col-md-8">
-                        <Visualizer />
-                      </div> */}
                     </div>
                   ) : (
                       <LoginSpotify />
                   ) }
-                  </div>
-                {/* {examples.map((example, index) => {
-                  if (example.separator) {
-                    return (<h2 key={index}>{example.name}</h2>);
-                  }
-
-                  if (example.advanced) {
-                    return (<div key={index}>
-                      <a href={example.page} target="blank">{example.name}</a> (new tab)
-                    </div>);
-                  }
-
-                  return (<NavLink
-                    to={`/${example.slug}`}
-                    key={index}
-                    className="link"
-                    activeClassName="selected"
-                  >
-                    {example.name}
-                  </NavLink>);
-                })} */}
-              </div>
             </div>
           </div>
           <Viewer example={examples[0]} />
@@ -123,4 +97,4 @@ const mapDispatchToProps = (dispatch, getState) => ({
   }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(Browser)
