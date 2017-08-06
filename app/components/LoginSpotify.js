@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 
-console.log('This is the proces', process.env)
-
 // const spotifyClientId = process.env.SPOTIFY_CLIENT_ID.replace(/"/g, '') || require('../../secrets.js').spotifyClientId
 const spotifyClientId = require('../../secrets.js').spotifyClientId
 

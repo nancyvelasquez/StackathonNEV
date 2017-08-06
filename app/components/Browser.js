@@ -54,7 +54,7 @@ class Browser extends Component {
       state = params.state,
       storedSpotifyState = window.localStorage['spotifyAuthKey']
     if (!access_token && (state == null || state !== storedSpotifyState)) {
-      console.log('There was an error during Spotify authentication :(')
+      console.log('There was an error during Spotify authentication')
     } else {
       return this.props.saveToken(access_token)
     }

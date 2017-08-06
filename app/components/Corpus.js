@@ -1,35 +1,19 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { grabCurrSong } from '../reducers'
 
 class Corpus extends Component {
   render() {
     return (
       <div id="corpusBlock">
-        <h6>
-          you're listening to:
-        </h6>
-        <h4>
-          {this.props.currSong || 'TBD'} by {this.props.currArtist || 'TBD'}
-        </h4>
-        <div className="buttonContainer">
-          <button
-            className="btn btn-success"
-            onClick={this.props.grabCurrentSong}
-          >
-            Grab my current song
-        </button>
-        </div>
-        <textarea
-          name="corpus"
-          value={this.props.corpus && this.props.corpus}
-        />
+          <h2>Discover Now</h2>
+          <h4>Live in the moment</h4>
+            <iframe src="https://open.spotify.com/embed?uri=spotify:user:spotify:playlist:37i9dQZEVXcH9yipLsAeeL" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
       </div>
     )
   }
 }
-/* ----- IMPORT CONTAINER DEPENDENCIES ----- */
-import { connect } from 'react-redux'
-import { grabCurrSong } from '../reducers'
-/* ----- CONTAINER ----- */
+
 const mapStateToProps = (store) => {
   return {
     currSong: store.currSong,
@@ -41,6 +25,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   grabCurrentSong: (evt) => {
     evt.preventDefault()
     dispatch(grabCurrSong(ownProps.access))
-  }
+  }, 
 })
+
 export default connect(mapStateToProps, mapDispatchToProps)(Corpus)

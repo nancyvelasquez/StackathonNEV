@@ -16,6 +16,7 @@ const SET_CURRENT = 'SET_CURRENT'
 const SET_TOKEN = 'SET_TOKEN'
 const SET_CORPUS = 'SET_CORPUS'
 const SET_CHART_DATA = 'SET_CHART_DATA'
+const SET_NEXT = 'SET_NEXT'
 
 
 /* ------------   ACTION CREATORS     ------------------ */
@@ -105,6 +106,7 @@ export const storeToken = token => (dispatch) => {
 export const grabCurrSong = token => (dispatch, getState) => {
   return axios.get('https://api.spotify.com/v1/me/player/currently-playing', { headers: { 'Authorization': `Bearer ${token}` } })
     .then(res => {
+      console.log('This is the res', res.data)
       const apiArtist = res.data.item.artists[0].name,
         apiSong = res.data.item.name
       if (apiArtist !== getState().currArtist || apiSong !== getState().currSong) {
@@ -113,7 +115,10 @@ export const grabCurrSong = token => (dispatch, getState) => {
     })
 }
 
+// ser-read-currently-playing and/or user-read-playback-state
+
 export const grabNextSong = token => (dispatch, getState) => {
+  console.log('got here')
   return axios.post('https://api.spotify.com/v1/me/player/next', { headers: { 'Authorization': `Bearer ${token}` } })
     .then(res => {
       console.log('Hey this is the res in post', res)
