@@ -1,14 +1,77 @@
-// import { combineReducers } from 'redux'
+// import axios from 'axios'
 
-// const rootReducer = combineReducers({
-//   auth: require('./auth').default,
-// })
+// /* -----------------    ACTIONS     ------------------ */
 
-// export default rootReducer
+// const SET_CURRENT = 'SET_CURRENT'
+// const SET_TOKEN = 'SET_TOKEN'
+// const SET_CORPUS = 'SET_CORPUS'
+// const SET_CHART_DATA = 'SET_CHART_DATA'
+
+// /* ------------   ACTION CREATORS     ------------------ */
+
+// const setCurr = (id, song) => {
+//   song = song.indexOf(' - ') > -1 ?
+//     song.slice(0, song.indexOf(' - ')) :
+//     song
+//   return {
+//     type: SET_CURRENT,
+//     id,
+//     song
+//   }
+// }
+
+// const setToken = token => ({ type: SET_TOKEN, token })
+
+// /* ------------       REDUCER     ------------------ */
+
+// export default (state = {
+//   data: {},
+//   isLoading: false,
+//   isLoggedIntoSpotify: false,
+//   currSong: '',
+//   currSongId: '',
+//   corpus: '',
+//   access_token: ''
+// }, action) => {
+//   const newState = Object.assign({}, state)
+//   switch (action.type) {
+//     case SET_CURRENT:
+//       newState.currSong = action.song
+//       newState.currSongId = action.currSongId
+//       break
+
+//     case SET_TOKEN:
+//       newState.isLoggedIntoSpotify = true
+//       newState.access_token = action.token
+//       break
+
+//     default:
+//       return state
+//   }
+//   return newState
+// }
+
+// /* ------------       DISPATCHERS     ------------------ */
+
+// export const storeToken = token => (dispatch) => {
+//   return dispatch(setToken(token))
+// }
+
+// export const grabCurrSong = token => (dispatch, getState) => {
+
+//   return axios.get('https://api.spotify.com/v1/me/player/currently-playing', { headers: { 'Authorization': `Bearer ${token}` } })
+//     .then(res => {
+//       const apiId = res.data.item.external_urls.id,
+//         apiSong = res.data.item.name
+//       if (apiId !== getState().currSongId || apiSong !== getState().currSong) {
+//         dispatch(setCurr(apiId, apiSong))
+//       }
+//     })
+// }
+  
+
 
 import axios from 'axios'
-
-// const googleKey = process.env.GOOGLE_KEY.replace(/"/g, '') || require('../../secret.js').googleKey
 
 /* -----------------    ACTIONS     ------------------ */
 
@@ -17,50 +80,20 @@ const SET_TOKEN = 'SET_TOKEN'
 const SET_CORPUS = 'SET_CORPUS'
 const SET_CHART_DATA = 'SET_CHART_DATA'
 
-
 /* ------------   ACTION CREATORS     ------------------ */
 
-const setCurr = (artist, song) => {
+const setCurr = (id, song) => {
   song = song.indexOf(' - ') > -1 ?
     song.slice(0, song.indexOf(' - ')) :
     song
   return {
     type: SET_CURRENT,
-    artist,
+    id,
     song
   }
 }
 
 const setToken = token => ({ type: SET_TOKEN, token })
-
-// const setCorpus = corpus => {
-//   corpus = corpus.replace(/\n\n/g, '\n')
-//     .replace(/\n/g, '.\n')
-//   return {
-//     type: SET_CORPUS,
-//     corpus
-//   }
-// }
-
-// const parseSentences = arr => {
-//   return arr.map(obj => {
-//     return {
-//       x: obj.text.beginOffset,
-//       y: obj.sentiment.score,
-//       sentence: obj.text.content || 'No text'
-//     }
-//   })
-// }
-
-// const setChartData = serverResponse => {
-//   return {
-//     type: SET_CHART_DATA,
-//     data: {
-//       documentSentiment: serverResponse.documentSentiment,
-//       sentences: parseSentences(serverResponse.sentences)
-//     }
-//   }
-// }
 
 /* ------------       REDUCER     ------------------ */
 
@@ -69,7 +102,7 @@ export default (state = {
   isLoading: false,
   isLoggedIntoSpotify: false,
   currSong: '',
-  currArtist: '',
+  currSongId: '',
   corpus: '',
   access_token: ''
 }, action) => {
@@ -77,17 +110,12 @@ export default (state = {
   switch (action.type) {
     case SET_CURRENT:
       newState.currSong = action.song
-      newState.currArtist = action.artist
+      newState.currSongId = action.currSongId
       break
 
     case SET_TOKEN:
       newState.isLoggedIntoSpotify = true
       newState.access_token = action.token
-      break
-
-    case SET_NEXT: 
-      newState.currSong = action.song
-      newState.currArtist = action.artist
       break
 
     default:
@@ -102,26 +130,24 @@ export const storeToken = token => (dispatch) => {
   return dispatch(setToken(token))
 }
 
+const getTrackFeat = (obj) => 
+  dispatch => {
+    return axios.get(`/https://api.spotify.com/v1/audio-features/${obj.id}`, { headers: { 'Authorization': `Bearer ${obj.token}` }})
+      .then(res => {
+        console.log('res', res)
+        dispatch(setCurr(obj.id, obj.song))
+      })
+      .catch(err => console.error('Failed to get track features', err.message))
+  }
+
 export const grabCurrSong = token => (dispatch, getState) => {
   return axios.get('https://api.spotify.com/v1/me/player/currently-playing', { headers: { 'Authorization': `Bearer ${token}` } })
     .then(res => {
-      const apiArtist = res.data.item.artists[0].name,
+      const apiId = res.data.item.id,
         apiSong = res.data.item.name
-      if (apiArtist !== getState().currArtist || apiSong !== getState().currSong) {
-        dispatch(setCurr(apiArtist, apiSong))
-      } //TODO: handle else
+      if (apiId !== getState().currSongId || apiSong !== getState().currSong) {
+        return getTrackFeat({ id: apiId, song: apiSong, token })(dispatch)
+      }
     })
+    .catch(err => console.error('Failed to get song ID', err.message))
 }
-
-export const grabNextSong = token => (dispatch, getState) => {
-  return axios.post('https://api.spotify.com/v1/me/player/next', { headers: { 'Authorization': `Bearer ${token}` } })
-    .then(res => {
-      console.log('Hey this is the res in post', res)
-      const apiArtist = res.data.item.artists[0].name,
-        apiSong = res.data.item.name
-      if (apiArtist !== getState().currArtist || apiSong !== getState().currSong) {
-        dispatch(setCurr(apiArtist, apiSong))
-      } //TODO: handle else
-    })
-}
-  

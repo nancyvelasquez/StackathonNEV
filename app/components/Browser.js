@@ -30,7 +30,7 @@ class Browser extends Component {
       return (
         <div>
           <div id="panel" className="collapsed">
-            <h1><a href="https://github.com/toxicFork/react-three-renderer/">react-three-renderer</a> / examples</h1>
+            <h1>Discover Now</h1>
             <div>
                   { this.props.isLoggedIntoSpotify ? (
                     <div id="appBlock" className="flexcontainer-horizontal">
