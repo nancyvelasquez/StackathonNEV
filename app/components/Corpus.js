@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { grabCurrSong } from '../reducers'
+import { grabCurrSong, getCurrTrackMood } from '../reducers'
 
 class Corpus extends Component {
   render() {
@@ -14,8 +14,14 @@ class Corpus extends Component {
             >
               Grab my current song
           </button>
+          <button
+              className="btn btn-success"
+              onClick={this.props.getCurrentTrackMood}
+            >
+              Set the Mood
+          </button>
          </div > 
-          <div onClick={this.props.grabCurrentSong}>
+          <div onClick={this.props.getCurrTrackMood}>
             <iframe src="https://open.spotify.com/embed?uri=spotify:user:spotify:playlist:37i9dQZEVXcH9yipLsAeeL" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
           </div>
       </div>
@@ -34,6 +40,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   grabCurrentSong: (evt) => {
     evt.preventDefault()
     dispatch(grabCurrSong(ownProps.access))
+  }, 
+  getCurrentTrackMood: (evt) => {
+    evt.preventDefault()
+    dispatch(getCurrTrackMood(ownProps.access))
   }, 
 })
 

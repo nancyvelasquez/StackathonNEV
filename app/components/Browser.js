@@ -6,6 +6,7 @@ import Viewer from './Viewer';
 import LoginSpotify from './LoginSpotify'
 import Corpus from './Corpus'
 import Planets from './Planets/index';
+import Ball from './Ball/index'
 
 const examples = [
   { 
@@ -13,6 +14,11 @@ const examples = [
     component: Planets,
     url: 'Planets/index',
     slug: 'webgl_planets',
+  }, { 
+    name: 'Ball',
+    component: Ball,
+    url: 'Ball/index',
+    slug: 'webgl_ball',
   },
 ];
 
@@ -24,13 +30,28 @@ class Browser extends Component {
   }
 
   render() {
-    // const match = React.PropTypes.object.isRequired
-    // const { params } = match;
-    // const activeExample = params.slug && examples.find(example => example.slug === params.slug);
+    const { params } = this.props.match;
+    const activeExample = params.slug && examples.find(example => example.slug === params.slug);
+    console.log('This is the active example', activeExample)
       return (
         <div>
           <div id="panel" className="collapsed">
             <h1>Discover Now</h1>
+            <div>
+              {examples.map((example, index) => {
+              if (example.separator) {
+                return (<h2 key={index}>{example.name}</h2>);
+              }
+              return (<NavLink
+                to={`/${example.slug}`}
+                key={index}
+                className="link"
+                activeClassName="selected"
+              >
+                {example.name}
+              </NavLink>);
+            })}
+            </div>
             <div>
                   { this.props.isLoggedIntoSpotify ? (
                     <div id="appBlock" className="flexcontainer-horizontal">
@@ -43,7 +64,7 @@ class Browser extends Component {
                   ) }
             </div>
           </div>
-          <Viewer example={examples[0]} />
+          <Viewer example={activeExample} />
         </div>
       );
     };
