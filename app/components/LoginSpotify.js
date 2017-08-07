@@ -13,7 +13,6 @@ export default class LoginSpotify extends Component {
     this.handleSpotifyLogin = this.handleSpotifyLogin.bind(this)
   }
   render() {
-    console.log('These are props in login', this.props)
     return (
       <div id="loginBlock" className="flexcontainer-vertical">
         <div className="login-button-container">

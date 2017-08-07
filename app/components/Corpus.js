@@ -8,8 +8,8 @@ class Corpus extends Component {
   render() {
     return (
         <SideNavItem>
-            <iframe src="https://open.spotify.com/embed?uri=spotify:user:spotify:playlist:37i9dQZEVXcH9yipLsAeeL&theme=white" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
-        </SideNavItem>
+            <iframe src="https://open.spotify.com/embed?uri=spotify:user:nevelasquez113:playlist:1zuxXxA6bpGDLqdg6jD4ri" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
+        </SideNavItem> 
     )
   }
 }

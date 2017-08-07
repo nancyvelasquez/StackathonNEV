@@ -1,7 +1,6 @@
 import React from 'react';
 
 import PureRenderMixin from 'react/lib/ReactComponentWithPureRenderMixin';
-// import TrackballControls from '../../ref/trackball';
 
 import * as THREE from 'three';
 import Stats from 'stats.js';

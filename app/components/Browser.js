@@ -29,7 +29,6 @@ const examples = [
   }
 ];
 
-// const Browser = ({ match }) => {
 class Browser extends Component {
   constructor(props) {
     super(props) 
@@ -59,21 +58,6 @@ class Browser extends Component {
                   ) }
                 </SideNavItem>
               </SideNav>
-            {/* <div>
-              {examples.map((example, index) => {
-              if (example.separator) {
-                return (<h2 key={index}>{example.name}</h2>);
-              }
-              return (<NavLink
-                to={`/${example.slug}`}
-                key={index}
-                className="link"
-                activeClassName="selected"
-              >
-                {example.name}
-                <br></br>
-              </NavLink>);
-            })} */}
           <Viewer example={activeExample} />
         </div>
       );
@@ -105,8 +89,6 @@ class Browser extends Component {
 Browser.propTypes = {
   match: React.PropTypes.object.isRequired,
 };
-
-// export default Browser;
 
 /* ----- IMPORT CONTAINER DEPENDENCIES ----- */
 

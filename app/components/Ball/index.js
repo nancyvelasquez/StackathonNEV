@@ -1,7 +1,6 @@
 import React from 'react';
 
 import PureRenderMixin from 'react/lib/ReactComponentWithPureRenderMixin';
-// import TrackballControls from '../../ref/trackball';
 
 import * as THREE from 'three';
 import Stats from 'stats.js';
@@ -17,7 +16,7 @@ class Geometries extends Base {
     
     const initialSpeed = 0;
     const x = 0; 
-    const y = 10;
+    const y = 0;
     const z = 0;
 
      this.objectPositions = [{ // sun

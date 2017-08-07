@@ -5,7 +5,8 @@ import { Slider, Slide, Carousel, NavItem, Icon, Footer, Navbar } from 'react-ma
 const NavbarSection = () => {
   return (
     <div>
-        <Navbar brand='' id="navbar-section">
+        <Navbar brand='' right>
+            <NavItem href='webgl_planets'>Open Your Eyes</NavItem>
         </Navbar>
     </div>
     );
