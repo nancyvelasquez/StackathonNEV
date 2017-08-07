@@ -1,6 +1,4 @@
-h4 {
-    padding-bottom: 15px;
-}
+
 
 #footer-section {
     background-color: black;
@@ -56,10 +54,35 @@ h4 {
     float: right;
 }
 
-#corpusBlock {
+#panel {
     padding-left: 10px;
 }
 
-#panel {
-    padding-left: 10px;
+#sidebar {
+    background-color: grey;
+    padding-left: 0px;
+    width: 350px;
+}
+
+.login-button-container {
+    background-color: grey; 
+}
+
+div {
+    background-color: black;
+}
+body {
+    background-color: black;
+}
+
+.div.drag-target {
+    width: 0px;
+}
+
+a {
+    background-color: grey;
+}
+
+#loginBlock {
+    background-color: grey;
 }

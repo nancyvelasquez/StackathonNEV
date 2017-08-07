@@ -59,45 +59,19 @@ class Geometries extends Base {
     this.refs.container.appendChild(this.stats.domElement);
     document.addEventListener('keydown', e => {
         console.log(this.state)
-        if(e.key === 's') this.setState({ speeds: this.state.speeds.map((val, i) => this.ease(i, 'speeds', 1000, val + 20)) });
+        if(e.key === 's') this.setState({ speeds: this.state.speeds.map(val => val + 20) });
         if(e.key === 'd') this.setState({ speeds: this.state.speeds.map(val => val - 20) });
         if(e.key === 'x') this.setState({ x_coord: this.state.x_coord.map(val => val + 20) });
+        if(e.key === 'n') this.setState({ x_coord: this.state.x_coord.map(val => val - 20) });
         if(e.key === 'y') this.setState({ y_coord: this.state.y_coord.map(val => val + 20) });
-        if(e.key === 'z') this.setState({ z_coord: this.state.z_coord.map(val => val + 20) })
+        if(e.key === 't') this.setState({ y_coord: this.state.y_coord.map(val => val - 20) });
+        if(e.key === 'z') this.setState({ z_coord: this.state.z_coord.map(val => val + 20) });
+        if(e.key === 'm') this.setState({ y_coord: this.state.y_coord.map(val => val - 20) });
     });
   }
 
   componentWillUnmount() {
     delete this.stats;
-  }
-
-  ease = (i, stateProp, time, endVal, beginVal) => {
-    beginVal = beginVal || this.state[stateProp][i];
-
-    const beginTime = Date.now();
-    let count = 0;
-
-    const trackerProp = `easeStart_${stateProp}_${i}`
-
-    if (this[trackerProp]) {
-        clearInterval(this[trackerProp]);
-    }
-
-    this[trackerProp] = beginTime;
-
-    const intervalId = setInterval(() => {
-      count++;
-      if (count <= time) {
-        const stateVal = this.state[stateProp].slice();
-        stateVal[i] = Math.round((endVal - beginVal) / time);
-        this.setState({
-            [stateProp]: stateVal
-        })
-      } else {
-          clearInterval(intervalId);
-          this[trackerProp] = null;
-      }
-    }, 1);
   }
 
   _onAnimate = () => {

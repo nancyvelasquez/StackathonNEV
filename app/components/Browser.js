@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM, { render } from 'react-dom';
 import { NavLink, Router, Route, IndexRedirect, browserHistory } from 'react-router-dom';
 import Viewer from './Viewer';
+import { SideNav, SideNavItem, Button } from 'react-materialize';
 
 import LoginSpotify from './LoginSpotify'
 import Corpus from './Corpus'
@@ -16,15 +17,15 @@ const examples = [
     url: 'Planets/index',
     slug: 'webgl_planets',
   }, { 
-    name: 'Ball',
+    name: 'Earth',
     component: Ball,
     url: 'Ball/index',
-    slug: 'webgl_ball',
+    slug: 'webgl_earth',
   }, {
-    name: 'Bouncing_Balls',
+    name: 'Random',
     component: BouncingBalls,
     url: 'BouncingBalls/index',
-    slug: 'webgl_bouncingballs'
+    slug: 'webgl_random'
   }
 ];
 
@@ -40,8 +41,25 @@ class Browser extends Component {
     const activeExample = params.slug && examples.find(example => example.slug === params.slug);
       return (
         <div>
-          <div id="panel" className="collapsed">
-            <div>
+            <SideNav
+                id="sidebar"
+                trigger={<Button>LINKS</Button>}
+                options={{ closeOnClick: true }}
+                >
+                <SideNavItem subheader>Pages</SideNavItem>
+                <SideNavItem id="page" waves href='#webgl_planets'>Planets</SideNavItem>
+                <SideNavItem id="page" waves href='webgl_earth'>Earth</SideNavItem>
+                <SideNavItem id="page" waves href='webgl_random'>Random</SideNavItem>
+                <br></br>
+                <SideNavItem>
+                  { this.props.isLoggedIntoSpotify ? (
+                      <Corpus access={this.props.access_token} />
+                  ) : (
+                      <LoginSpotify />
+                  ) }
+                </SideNavItem>
+              </SideNav>
+            {/* <div>
               {examples.map((example, index) => {
               if (example.separator) {
                 return (<h2 key={index}>{example.name}</h2>);
@@ -55,20 +73,7 @@ class Browser extends Component {
                 {example.name}
                 <br></br>
               </NavLink>);
-            })}
-            </div>
-            <div>
-                  { this.props.isLoggedIntoSpotify ? (
-                    <div id="appBlock" className="flexcontainer-horizontal">
-                      <div className="col-md-4">
-                        <Corpus access={this.props.access_token} />
-                      </div>
-                    </div>
-                  ) : (
-                      <LoginSpotify />
-                  ) }
-            </div>
-          </div>
+            })} */}
           <Viewer example={activeExample} />
         </div>
       );
