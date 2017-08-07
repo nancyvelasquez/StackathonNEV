@@ -7,16 +7,16 @@ const spotifyClientId = require('../../secrets.js').spotifyClientId
 const spotifyRedirectURI = require('../../secrets.js').spotifyRedirectURI
 
 export default class LoginSpotify extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.generateRandomString = this.generateRandomString.bind(this)
     this.handleSpotifyLogin = this.handleSpotifyLogin.bind(this)
   }
   render() {
+    console.log('These are props in login', this.props)
     return (
       <div id="loginBlock" className="flexcontainer-vertical">
-        <h4 id="start">Discover Now</h4>
-        <div className="login-button-container flexcontainer-vertical">
+        <div className="login-button-container">
           <button
             id="login-button"
             className="btn btn-success"

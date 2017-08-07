@@ -58,13 +58,13 @@ class Geometries extends Base {
       resourceUrl: "./images/NOAA_Jupiter.jpg",
     }, {
       name: "Saturn",
-      coords: new THREE.Vector3(-700, 0, 0),
+      coords: new THREE.Vector3(-900, 0, 0),
       spin: 28,
       radius: 58.2,
       resourceUrl: "./images/NOAA_Saturn.jpg",
     }, {
       name: "Uranus",
-      coords: new THREE.Vector3(900, 0, 0), // Saturn
+      coords: new THREE.Vector3(700, 0, 0), // Saturn
       spin: 23,
       radius: 25.3,
       resourceUrl: "./images/NOAA_Uranus.jpg",
