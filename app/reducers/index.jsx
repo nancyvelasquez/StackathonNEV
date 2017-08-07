@@ -1,6 +1,5 @@
 import axios from 'axios'
 
-
 const initialState = {
   data: {},
   isLoading: false,
@@ -8,15 +7,16 @@ const initialState = {
   currSong: '',
   currSongId: '',
   corpus: '',
-  access_token: ''
+  access_token: '',
+  today: {},
+  tomorrow: {},
 }
 
 /* -----------------    ACTIONS     ------------------ */
 
 const SET_CURRENT = 'SET_CURRENT'
 const SET_TOKEN = 'SET_TOKEN'
-const SET_CORPUS = 'SET_CORPUS'
-const SET_CHART_DATA = 'SET_CHART_DATA'
+const SET_POPS = 'SET_POPS'
 
 /* ------------   ACTION CREATORS     ------------------ */
 
@@ -28,6 +28,17 @@ const setCurr = (id, song) => {
     type: SET_CURRENT,
     id,
     song
+  }
+}
+
+const setPops = ({total_population}) => {
+  console.log(total_population)
+  const today = total_population[0]
+  const tomorrow = total_population[1]
+  return {
+    type: SET_POPS,
+    today,
+    tomorrow
   }
 }
 
@@ -48,6 +59,11 @@ export default (state = initialState, action) => {
       newState.access_token = action.token
       break
 
+    case SET_POPS: 
+      newState.today = action.today
+      newState.tomorrow = action.tomorrow
+      break
+
     default:
       return state
   }
@@ -60,10 +76,10 @@ export const storeToken = token => (dispatch) => {
   return dispatch(setToken(token))
 }
 
-
 export const grabCurrSong = token => (dispatch, getState) => {
   return axios.get('https://api.spotify.com/v1/me/player/currently-playing', { headers: { 'Authorization': `Bearer ${token}` } })
     .then(res => {
+      console.log('This is the res.data', res.data)
       const apiId = res.data.item.external_urls.id,
         apiSong = res.data.item.name
       if (apiId !== getState().currSongId || apiSong !== getState().currSong) {
@@ -73,12 +89,12 @@ export const grabCurrSong = token => (dispatch, getState) => {
     .catch(err => console.error(`Error loading song`, err))
 }
 
-// export const getCurrTrackMood = token => (dispatch, getState) => {
-//   return axios.get(`https://api.spotify.com/v1/tracks/${id}`, { headers: { 'Authorization': `Bearer ${token}` } })
-//     .then(res => {
-//       console.log('this is the data', res.data)
-//       dispatch(setMood(res.data))
-//     })
-//     .catch(err => console.error(`Error loading track features`, err))
-// }
-  
+export const getPop = () => (dispatch, getState) => {
+  return axios.get('http://api.population.io:80/1.0/population/United%20States/today-and-tomorrow/')
+  .then(res => res.data)
+  .then(obj => {
+    dispatch(setPops(obj))
+  })
+  .catch(err => console.error(`Error loading song`, err))
+}
+

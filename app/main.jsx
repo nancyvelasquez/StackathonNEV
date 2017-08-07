@@ -19,9 +19,6 @@ import NavbarSection from './components/Navbar'
 import FooterSection from './components/Footer'
 
 import store from './store'
-import Jokes from './components/Jokes'
-import Login from './components/Login'
-import WhoAmI from './components/WhoAmI'
 import NotFound from './components/NotFound'
 
 window.Perf = Perf;
@@ -38,7 +35,7 @@ const Planets = connect(
         <NavbarSection />
         <Switch>
           <Route exact path="/" component={Home} />
-           <Route exact path="/:slug?" component={Browser} /> 
+          <Route exact path="/:slug?" component={Browser} /> 
           <Route component={NotFound} />
         </Switch>
         <FooterSection />
@@ -54,24 +51,3 @@ render(
   </Provider>,
   document.getElementById('content')
 )
-
-
-
-// const LVR = ({ user, children }) => (
-//   <div>
-//     <Navbar />
-
-//     <Routes />
-
-//     <Footer />
-//   </div>
-// )
-
-// render(
-//   <Provider store={store}>
-//     <Router>
-//       <LVR />
-//     </Router>
-//   </Provider>,
-//   document.getElementById('main')
-// )

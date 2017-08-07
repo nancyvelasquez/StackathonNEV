@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 
-console.log('This is the proces', process.env)
-
 // const spotifyClientId = process.env.SPOTIFY_CLIENT_ID.replace(/"/g, '') || require('../../secrets.js').spotifyClientId
 const spotifyClientId = require('../../secrets.js').spotifyClientId
 
@@ -17,7 +15,7 @@ export default class LoginSpotify extends Component {
   render() {
     return (
       <div id="loginBlock" className="flexcontainer-vertical">
-        <h3 id="start">START</h3>
+        <h4 id="start">Discover Now</h4>
         <div className="login-button-container flexcontainer-vertical">
           <button
             id="login-button"
@@ -44,6 +42,5 @@ export default class LoginSpotify extends Component {
     // const url = `https://accounts.spotify.com/authorize?response_type=token&client_id=${encodeURIComponent(spotifyClientId)}&redirect_uri=${encodeURIComponent(spotifyRedirectURI)}&state=${encodeURIComponent(localStorage['spotifyAuthKey'])}`
     const url = `https://accounts.spotify.com/authorize?response_type=token&client_id=${encodeURIComponent(spotifyClientId)}&scope=${encodeURIComponent('user-read-currently-playing')}&redirect_uri=${encodeURIComponent(spotifyRedirectURI)}&state=${encodeURIComponent(localStorage['spotifyAuthKey'])}`
     window.location = url
-    console.log(url)
   }
 }
