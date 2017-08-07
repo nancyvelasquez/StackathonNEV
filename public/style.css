@@ -1,3 +1,7 @@
+h4 {
+    padding-bottom: 15px;
+}
+
 #footer-section {
     background-color: black;
 }
@@ -50,4 +54,12 @@
 
 .photocred {
     float: right;
+}
+
+#corpusBlock {
+    padding-left: 10px;
+}
+
+#panel {
+    padding-left: 10px;
 }

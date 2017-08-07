@@ -7,6 +7,7 @@ import LoginSpotify from './LoginSpotify'
 import Corpus from './Corpus'
 import Planets from './Planets/index';
 import Ball from './Ball/index'
+import BouncingBalls from './BouncingBalls/index'
 
 const examples = [
   { 
@@ -19,7 +20,12 @@ const examples = [
     component: Ball,
     url: 'Ball/index',
     slug: 'webgl_ball',
-  },
+  }, {
+    name: 'Bouncing_Balls',
+    component: BouncingBalls,
+    url: 'BouncingBalls/index',
+    slug: 'webgl_bouncingballs'
+  }
 ];
 
 // const Browser = ({ match }) => {
@@ -32,11 +38,9 @@ class Browser extends Component {
   render() {
     const { params } = this.props.match;
     const activeExample = params.slug && examples.find(example => example.slug === params.slug);
-    console.log('This is the active example', activeExample)
       return (
         <div>
           <div id="panel" className="collapsed">
-            <h1>Discover Now</h1>
             <div>
               {examples.map((example, index) => {
               if (example.separator) {
@@ -49,6 +53,7 @@ class Browser extends Component {
                 activeClassName="selected"
               >
                 {example.name}
+                <br></br>
               </NavLink>);
             })}
             </div>

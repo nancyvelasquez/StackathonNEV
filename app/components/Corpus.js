@@ -1,27 +1,26 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { grabCurrSong, getCurrTrackMood } from '../reducers'
+import { grabCurrSong, getPop } from '../reducers'
 
 class Corpus extends Component {
   render() {
     return (
       <div id="corpusBlock">
           <h4>Live in the moment</h4>
-           <div className="buttonContainer">
-            <button
+           {/* <div className="buttonContainer">
+             <button
               className="btn btn-success"
               onClick={this.props.grabCurrentSong}
             >
               Grab my current song
-          </button>
-          <button
+          </button>  */}
+          {/* <button
               className="btn btn-success"
-              onClick={this.props.getCurrentTrackMood}
+              onClick={this.props.getCurrPop}
             >
-              Set the Mood
-          </button>
-         </div > 
-          <div onClick={this.props.getCurrTrackMood}>
+              Who Is Here
+          </button> */}
+          <div>
             <iframe src="https://open.spotify.com/embed?uri=spotify:user:spotify:playlist:37i9dQZEVXcH9yipLsAeeL" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
           </div>
       </div>
@@ -31,9 +30,8 @@ class Corpus extends Component {
 
 const mapStateToProps = (store) => {
   return {
-    currSong: store.currSong,
-    currArtist: store.currArtist,
-    corpus: store.corpus
+    currPop: store.today,
+    tomorrowPop: store.tomorrow
   }
 }
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -41,9 +39,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     evt.preventDefault()
     dispatch(grabCurrSong(ownProps.access))
   }, 
-  getCurrentTrackMood: (evt) => {
+  getCurrPop: (evt) => {
     evt.preventDefault()
-    dispatch(getCurrTrackMood(ownProps.access))
+    dispatch(getPop())
   }, 
 })
 
