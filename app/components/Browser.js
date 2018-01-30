@@ -55,7 +55,7 @@ class Browser extends Component {
             { this.props.isLoggedIntoSpotify ? (
               <Corpus access={this.props.access_token} />
             ) : (
-              // <LoginSpotify />
+              <LoginSpotify />
             ) }
           </SideNavItem> */}
         </SideNav>

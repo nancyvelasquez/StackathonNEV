@@ -7,8 +7,8 @@ import Viewer from './Viewer';
 const Home = () => {
   return (
     <div>
+        <button id="button-black" className="waves-effect waves-light btn"><a href="/webgl_planets">Open Your Mind</a></button>
         <Carousel
-            fixedItem={<a href="/webgl_planets" id="button-black" className="waves-effect waves-light btn">Open Your Mind</a>}
             options={{ fullWidth: true }}
             images={[
                 'https://images.unsplash.com/photo-1485795959911-ea5ebf41b6ae?dpr=1&auto=format&fit=crop&w=1080&h=711&q=80&cs=tinysrgb&crop=',
