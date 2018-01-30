@@ -10,7 +10,7 @@ const chalk = require('chalk')
     , fs = require('fs')
     , {resolve} = require('path')
 
-    , appLink = resolve(__dirname, '..', 'node_modules', 'APP')
+    , appLink = resolve(__dirname, '..', 'node_modules', '../')
 
     , symlinkError = error =>
 `*******************************************************************

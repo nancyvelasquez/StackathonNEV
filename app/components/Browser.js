@@ -4,7 +4,7 @@ import { NavLink, Router, Route, IndexRedirect, browserHistory } from 'react-rou
 import Viewer from './Viewer';
 import { SideNav, SideNavItem, Button } from 'react-materialize';
 
-import LoginSpotify from './LoginSpotify'
+// import LoginSpotify from './LoginSpotify'
 import Corpus from './Corpus'
 import Planets from './Planets/index';
 import Ball from './Ball/index'
@@ -39,45 +39,30 @@ class Browser extends Component {
   render() {
     const { params } = this.props.match;
     const activeExample = params.slug && examples.find(example => example.slug === params.slug);
-      return (
-        <div>
-            <SideNav
-                id="sidebar"
-                trigger={<Button>LINKS</Button>}
-                options={{ closeOnClick: true }}
-                >
-                <SideNavItem subheader>Pages</SideNavItem>
-                <SideNavItem id="page" waves href='#webgl_planets'>Planets</SideNavItem>
-                <SideNavItem id="page" waves href='webgl_earth'>Earth</SideNavItem>
-                <SideNavItem id="page" waves href='webgl_random'>Random</SideNavItem>
-                <br></br>
-                <SideNavItem>
-                  { this.props.isLoggedIntoSpotify ? (
-                      <Corpus access={this.props.access_token} />
-                  ) : (
-                      <LoginSpotify />
-                  ) }
-                </SideNavItem>
-              </SideNav>
-            {/* <div>
-              {examples.map((example, index) => {
-              if (example.separator) {
-                return (<h2 key={index}>{example.name}</h2>);
-              }
-              return (<NavLink
-                to={`/${example.slug}`}
-                key={index}
-                className="link"
-                activeClassName="selected"
-              >
-                {example.name}
-                <br></br>
-              </NavLink>);
-            })} */}
-          <Viewer example={activeExample} />
-        </div>
-      );
-    };
+    return (
+      <div>
+        <SideNav
+          id="sidebar"
+          trigger={<Button>LINKS</Button>}
+          options={{ closeOnClick: true }}
+        >
+          <SideNavItem subheader>Pages</SideNavItem>
+          <SideNavItem id="page" waves href='#webgl_planets'>Planets</SideNavItem>
+          <SideNavItem id="page" waves href='webgl_earth'>Earth</SideNavItem>
+          <SideNavItem id="page" waves href='webgl_random'>Random</SideNavItem>
+          <br></br>
+          {/* <SideNavItem>
+            { this.props.isLoggedIntoSpotify ? (
+              <Corpus access={this.props.access_token} />
+            ) : (
+              // <LoginSpotify />
+            ) }
+          </SideNavItem> */}
+        </SideNav>
+        <Viewer example={activeExample} />
+      </div>
+    );
+  };
 
   componentDidMount() {
     const params = this.getHashParams(),

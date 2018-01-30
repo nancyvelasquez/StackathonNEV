@@ -1,5 +1,5 @@
 'use strict'
-const app = require('APP')
+const app = require('../')
     , debug = require('debug')(`${app.name}:db`) // DEBUG=your_app_name:db
     , chalk = require('chalk')
     , Sequelize = require('sequelize')

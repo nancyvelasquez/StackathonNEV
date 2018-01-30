@@ -4,7 +4,7 @@
 // so any other part of the application could call sequelize.model('User')
 // to get access to the User model.
 
-const app = require('APP')
+const app = require('../../')
     , debug = require('debug')(`${app.name}:models`)
     // Our model files export functions that take a database and return
     // a model. We call these functions "meta models" (they are models of

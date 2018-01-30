@@ -1,6 +1,6 @@
 'use strict'
 
-const app = require('APP')
+const app = require('../../')
     , debug = require('debug')(`${app.name}:oauth`)
     , {STRING, JSON} = require('sequelize')
 
