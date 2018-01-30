@@ -4,7 +4,7 @@
   "description": "A happy little skeleton.",
   "main": "index.js",
   "engines": {
-    "node": ">= 7.0.0"
+    "node": "8.9.4"
   },
   "scripts": {
     "dev": "node dev",
@@ -34,7 +34,7 @@
     "redux",
     "skeleton"
   ],
-  "author": "Ashi Krishnan <me@ashi.works>",
+  "author": "Nancy Velasquez",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/queerviolet/bones/issues"
